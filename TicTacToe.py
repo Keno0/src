@@ -56,6 +56,7 @@ else:
 
 endGame = False
 yourTurn = ''
+AITurn = ''
 
 
 while endGame != True:
@@ -69,8 +70,17 @@ while endGame != True:
         else:
             TicTacToeBoard[yourTurn] = playerSymbol
             valid = True
-    
-    
+    valid = False
+    while valid != True:
+        AITurn = str(random.randint(0,4)) + str(random.randint(0,4))
+        print(AITurn)
+        if(TicTacToeBoard[AITurn] != ' '):
+            
+            valid = False
+        else:
+            TicTacToeBoard[AITurn] = AISymbol
+            valid = True
+        
     printBoard(sizeOfBoard,TicTacToeBoard)
     
 
