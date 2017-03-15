@@ -30,7 +30,23 @@ def printBoard(dimension, board):
                 print('-', end='')
             print()
     
-
+def evaluate(dimension, board):
+    counter = 0
+    for i in range(dimension):
+        for j in range(dimension-1):        
+            if board[str(i)+str(j)] == board[str(i)+str(j+1)] and board[str(i)+str(j)] != ' ':
+                counter += 1
+                if(counter == 4):
+                    if(board[str(i)+str(j+1)] == playerSymbol):
+                        print('You won')
+                    else:
+                        print('You lose')
+                    return True
+            else:
+                counter = 0
+        counter = 0
+            
+    return False
 
 
          
@@ -58,6 +74,7 @@ endGame = False
 yourTurn = ''
 AITurn = ''
 
+print('Give indexes of column and row to put your symbol. Indexes are started from 0.')
 
 while endGame != True:
     valid = False
@@ -72,7 +89,7 @@ while endGame != True:
             valid = True
     valid = False
     while valid != True:
-        AITurn = str(random.randint(0,4)) + str(random.randint(0,4))
+        AITurn = str(random.randint(0,sizeOfBoard-1)) + str(random.randint(0,sizeOfBoard-1))
         print(AITurn)
         if(TicTacToeBoard[AITurn] != ' '):
             
@@ -82,6 +99,8 @@ while endGame != True:
             valid = True
         
     printBoard(sizeOfBoard,TicTacToeBoard)
+    
+    endGame = evaluate(sizeOfBoard, TicTacToeBoard)
     
 
 
